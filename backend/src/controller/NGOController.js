@@ -5,6 +5,7 @@ module.exports = {
   async index(req, resp) {
     try {
       const ngos = await connection('ngos').select('*');
+      console.log('list ngo was accessed');
       return resp.json(ngos);
     } catch (e) {
       console.log(e);
@@ -16,7 +17,7 @@ module.exports = {
       const { name, email, whatsapp, city, state } = req.body;
 
       const id = crypto.randomBytes(4).toString('HEX');
-
+      console.log('create ngo was accessed');
       await connection('ngos').insert({
         id,
         name,

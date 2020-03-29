@@ -8,11 +8,11 @@ const connection = require('./database/connection');
 
 const routes = express.Router();
 
-routes.post('/sessions', SessionController.create);
 routes.get('/ngos', NGOController.index);
 routes.get('/events', EventController.index);
 routes.get('/profile', ProfileController.index);
 
+routes.post('/sessions', SessionController.create);
 routes.post('/ngos', NGOController.create);
 routes.post('/event', EventController.create);
 
