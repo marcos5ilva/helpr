@@ -17,10 +17,10 @@ module.exports = {
           'ngos.email',
           'ngos.whatsapp',
           'ngos.city',
-          'ngos.state'
+          'ngos.state',
         ]);
 
-      resp.headers('X-Total-Count', count['count(*)']);
+      resp.header('X-Total-Count', count['count(*)']);
 
       return resp.json(events);
     } catch (e) {
@@ -37,7 +37,7 @@ module.exports = {
         title,
         description,
         value,
-        ngo_id
+        ngo_id,
       });
 
       return resp.json({ id });
@@ -60,13 +60,11 @@ module.exports = {
         return resp.status(401).json({ error: 'Operation not authorized' });
       }
 
-      await connection('events')
-        .where('id', id)
-        .delete();
+      await connection('events').where('id', id).delete();
 
       return resp.status(204).send();
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 };
