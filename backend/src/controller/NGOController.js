@@ -1,5 +1,6 @@
 const connection = require('../database/connection');
 const crypto = require('crypto');
+const generateUniqueId = require('../utils/generateUniqueId');
 
 module.exports = {
   async index(req, resp) {
@@ -16,7 +17,7 @@ module.exports = {
     try {
       const { name, email, whatsapp, city, state } = req.body;
 
-      const id = crypto.randomBytes(4).toString('HEX');
+      const id = generateUniqueId();
       console.log('create ngo was accessed');
       await connection('ngos').insert({
         id,
@@ -24,14 +25,14 @@ module.exports = {
         email,
         whatsapp,
         city,
-        state
+        state,
       });
 
       return resp.json({ id });
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 
   // async delete(req, resp){
   //   try {
